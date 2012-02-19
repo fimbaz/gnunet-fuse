@@ -1,0 +1,127 @@
+gnunet-fuse (0.8.0c-7) unstable; urgency=low
+
+  * Orphaning package.
+
+ -- Daniel Baumann <daniel.baumann@progress-technologies.net>  Sun, 19 Feb 2012 08:38:32 +0000
+
+gnunet-fuse (0.8.0c-6) experimental; urgency=low
+
+  * Updating maintainer and uploaders fields.
+  * Removing vcs fields.
+  * Updating to standards version 3.9.2.
+  * Updating to debhelper version 8.
+  * Removing pre-squeeze version from gnunet-dev build-depends.
+  * Removing references to my old email address.
+  * Making packaging distribution neutral.
+  * Switching to source format 3.0 (quilt).
+  * Updating year in copyright file.
+  * Compacting copyright file.
+  * Simplifying autotools handling in rules.
+
+ -- Daniel Baumann <daniel.baumann@progress-technologies.net>  Mon, 12 Sep 2011 09:32:17 +0200
+
+gnunet-fuse (0.8.0c-5) unstable; urgency=medium
+
+  * Adding explicit debian source version 1.0 until switch to 3.0.
+  * Updating year in copyright file.
+  * Updating to standards 3.8.4.
+  * Rebuilding against libextractor with epoche to ease testing
+    migration.
+
+ -- Daniel Baumann <daniel.baumann@progress-technologies.net>  Sat, 20 Mar 2010 12:13:10 +0100
+
+gnunet-fuse (0.8.0c-4) unstable; urgency=low
+
+  * Updating to standards version 3.8.3.
+  * Adding maintainer homepage field to control.
+  * Marking maintainer homepage field to be also included in binary
+    packages and changelog.
+  * Adding README.source.
+  * Simplifying autotools handling in rules.
+  * Moving maintainer homepage field from control to copyright.
+  * Updating README.source.
+  * Bumping versioned build-depends on debhelper.
+
+ -- Daniel Baumann <daniel.baumann@progress-technologies.net>  Tue, 17 Nov 2009 20:21:47 +0100
+
+gnunet-fuse (0.8.0c-3) unstable; urgency=low
+
+  * Adding missing build-depends to autotools-dev (Closes: #541096).
+
+ -- Daniel Baumann <daniel.baumann@progress-technologies.net>  Tue, 11 Aug 2009 21:21:37 +0200
+
+gnunet-fuse (0.8.0c-2) unstable; urgency=low
+
+  * Updating maintainer field.
+  * Updating vcs fields.
+  * Wrapping lines in control.
+  * Minimizing rules file.
+
+ -- Daniel Baumann <daniel.baumann@progress-technologies.net>  Mon, 10 Aug 2009 23:21:52 +0200
+
+gnunet-fuse (0.8.0c-1) unstable; urgency=low
+
+  * Using correct rfc-2822 date formats in changelog.
+  * Tidy rules file.
+  * Upgrading package to standards 3.8.1.
+  * Merging upstream version 0.8.0c:
+    - fixes FTBFS with newer fuse (Closes: #536998).
+  * Updating year in copyright file.
+  * Updating version and date in manpage header.
+  * Tightening versioned build-depends on gnunet.
+  * Upgrading package to standards version 3.8.2.
+
+ -- Daniel Baumann <daniel.baumann@progress-technologies.net>  Sun, 26 Jul 2009 11:33:04 +0200
+
+gnunet-fuse (0.8.0-4) unstable; urgency=low
+
+  * Replacing obsolete dh_clean -k with dh_prep.
+  * Prefixing debhelper files with package name.
+  * Removing Arnaud from uploaders, he is MIA (Closes: #513163).
+  * Updating year in copyright file.
+  * Updating rules to current state of the art.
+  * Updating manpages.
+
+ -- Daniel Baumann <daniel.baumann@progress-technologies.net>  Thu, 05 Feb 2009 00:30:00 +0100
+
+gnunet-fuse (0.8.0-3) unstable; urgency=low
+
+  * Adding gnunet-server to suggests.
+  * Adding note about requiring gnunet-server in gnunet-fuse package
+    long-description.
+
+ -- Daniel Baumann <daniel.baumann@progress-technologies.net>  Fri, 19 Sep 2008 10:45:00 +0200
+
+gnunet-fuse (0.8.0-2) unstable; urgency=low
+
+  * Updating vcs fields in control file.
+  * Building gnunet-fuse on all architectures again, guile-1.8 on ia64 is back.
+
+ -- Daniel Baumann <daniel.baumann@progress-technologies.net>  Sun, 14 Sep 2008 13:11:00 +0200
+
+gnunet-fuse (0.8.0-1) unstable; urgency=low
+
+  * Excluding ia64 manually from architectures.
+  * Bumping versioned gnunet build-depends to 0.8.0.
+  * Merging upstream version 0.8.0.
+  * Reordering rules file.
+  * Rewriting copyright file in machine-interpretable format.
+  * Adding vcs fields in control file.
+  * Switching maintainer and uploaders fields.
+  * Upgrading package to debhelper 7.
+  * Removing watch file.
+  * Updating to standards 3.8.0.
+
+ -- Daniel Baumann <daniel.baumann@progress-technologies.net>  Thu, 19 Jun 2008 15:46:00 +0200
+
+gnunet-fuse (0.7.3-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Daniel Baumann <daniel.baumann@progress-technologies.net>  Mon, 24 Dec 2007 17:26:00 +0100
+
+gnunet-fuse (0.7.2b-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Daniel Baumann <daniel.baumann@progress-technologies.net>  Fri, 07 Dec 2007 12:01:00 +0100
