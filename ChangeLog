@@ -1,34 +1,14 @@
-2008-06-13 Christian Grothoff <christian@grothoff.org> 0.8.0
-* Release version
-2007-12-20 Christian Grothoff <christian@grothoff.org> 0.7.3
-* Release version
-2007-07-29 David Barksdale <amatus@gnu.org> 0.7.2b
-* Release version
-2007-07-26 David Barksdale <amatus@gnu.org> 0.7.2-5
-* Finished support for truncate
-2007-07-17 David Barksdale <amatus@gnu.org> 0.7.2-4
-* Added support for renaming files
-2007-07-12 David Barksdale <amatus@gnu.org> 0.7.2-3
-* Added support for unlinking files, creating directories, and removing
-directories
-2007-07-12 David Barksdale <amatus@gnu.org> 0.7.2-2
-* Added support for creating and modifying files
-2007-06-18 David Barksdale <amatus@gnu.org> 0.7.2-1
-* Modified configure script to better detect compatability with GNUnet
-2007-06-18 David Barksdale <amatus@gnu.org> 0.7.2
-* Gratuitous version incrementation
-2007-06-12 David Barksdale <amatus@gnu.org> 0.6
-* Cleaned up fuse command line option passing (in a manner of speaking)
-* Added an implicit "-o ro" so the mount shows up as read-only (for now)
-* Added support for interrupting read operations
-2007-06-10 David Barksdale <amatus@gnu.org> 0.5
-* Added .uri.<file> files which read the uri of <file>
-2007-06-08 David Barksdale <amatus@gnu.org> 0.4
-* Added .uri files which read the uri of the containing directory
-2007-05-30 David Barksdale <amatus@gnu.org> 0.3
-* Added support for ECRS_downloadPartialFile (requires GNUnet > 0.7.1c)
-2007-05-29 David Barksdale <amatus@gnu.org> 0.2
-* Fixed ref-counting bug in gn_dirent_find
-* Added legal stuff to source files
-2007-05-28 David Barksdale <amatus@gnu.org> 0.1
-* Initial version
+2012-03-07  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* m4/gettext.m4: New file, from gettext-0.18.1.
+	* m4/iconv.m4: New file, from gettext-0.18.1.
+	* m4/lib-ld.m4: New file, from gettext-0.18.1.
+	* m4/lib-link.m4: New file, from gettext-0.18.1.
+	* m4/lib-prefix.m4: New file, from gettext-0.18.1.
+	* m4/nls.m4: New file, from gettext-0.18.1.
+	* m4/po.m4: New file, from gettext-0.18.1.
+	* m4/progtest.m4: New file, from gettext-0.18.1.
+	* Makefile.am (SUBDIRS): Add po.
+	* configure.ac (AC_OUTPUT): Add po/Makefile.in.
+	(AM_GNU_GETTEXT_VERSION): Bump to 0.18.1.
+
