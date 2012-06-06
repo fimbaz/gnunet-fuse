@@ -1,0 +1,38 @@
+                    gnunet-fuse - FUSE filesystem for GNUnet
+
+Summary
+=======
+You need the URI of a file with the mime-type of application/gnunet-directory.
+You can either publish a directory with gnunet-insert or do a search for the
+mime-type. To mount the URI use the following command.
+
+$ echo gnunet://ecrs/chk/XXXX/YYYY.NNNN > uri_file
+$ gnunet-fs uri_file /mnt
+
+Where gnunet://ecrs/chk/XXXX/YYYY.NNNN is the URI and /mnt is the mount point.
+
+Usage
+=====
+gnunet-fuse [OPTIONS] <URI FILE> <PATH>
+Arguments mandatory for long options are also mandatory for short options.
+  -h, --help                 print this help
+  -c, --config=FILENAME      use configuration file FILENAME
+  -L, --log=LOGLEVEL         configure logging to use LOGLEVEL
+  -l, --logfile=FILE         set logfile name
+  -a, --anonymity=LEVEL      set the desired LEVEL of sender-anonymity
+  -p, --priority=LEVEL       set the desired LEVEL of priority
+  -u, --uri-files            Make .uri files visible
+  -x, --Xfuse                Escape fuse option
+
+Example use of -x option:
+$ gnunet-fs -x-o -xfsname=GNUnet <URI> <path>
+Mounts <URI> at <path> and passes "-o fsname=GNUnet" as fuse options.
+
+Special Files
+=============
+Each directory contains the following special files. These files are read-only
+and aren't actually part of the directory, they are generated on-the-fly by
+gnunet-fs.
+
+ .uri        - contains the URI of the directory
+ .uri.<file> - contains the URI of the file named <file> in the directory
