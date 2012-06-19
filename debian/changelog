@@ -1,3 +1,20 @@
+gnunet-fuse (0.9.3-1) unstable; urgency=low
+
+  * New maintainer (Closes: #660439).
+  * Add debian/watch.
+  * Imported Upstream version 0.9.3 (Closes: #674342).
+  * New maintainer.
+  * debian/control: add Vcs-Git and Vcs-browser fields.
+  * Standards version 3.9.3: no changes needed.
+  * debian/copyright:
+    + use copyright format 1.0.
+    + gnunet-fuse is now released under the GPL-3+.
+  * Rename and update the manpage.
+  * Update debhelper compatibility level to v9.
+  * Move to dh-autoreconf.
+
+ -- Bertrand Marc <beberking@gmail.com>  Tue, 19 Jun 2012 22:01:43 +0200
+
 gnunet-fuse (0.8.0c-7) unstable; urgency=low
 
   * Orphaning package.
