@@ -3,7 +3,6 @@ gnunet-fuse (0.9.3-1) unstable; urgency=low
   * New maintainer (Closes: #660439).
   * Add debian/watch.
   * Imported Upstream version 0.9.3 (Closes: #674342).
-  * New maintainer.
   * debian/control: add Vcs-Git and Vcs-browser fields.
   * Standards version 3.9.3: no changes needed.
   * debian/copyright:
