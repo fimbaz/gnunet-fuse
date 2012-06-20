@@ -4,7 +4,8 @@ Upstream-Contact: Christian Grothoff <christian@grothoff.org>
 Source: https://gnunet.org/
 
 Files: src/*
-Copyright: (C) 2001-2012 Christian Grothoff <christian@grothoff.org>
+Copyright: (C) 2007-2012 Christian Grothoff <christian@grothoff.org>
+           (C) 2007-2009 David Barksdale <amatus@gnu.org>
 License: GPL-3+
 
 Files: debian/*
