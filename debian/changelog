@@ -1,3 +1,13 @@
+gnunet-fuse (0.9.3-2) unstable; urgency=low
+
+  * Build-depend on gnunet (>=0.9.3) since it will fail to build with any lower
+    version.
+  * Correct debian/copyright: mention again David Barksdale, the previous
+    author.
+  * debian/changelog: remove a duplicate entry from the previous version.
+
+ -- Bertrand Marc <beberking@gmail.com>  Wed, 20 Jun 2012 23:35:01 +0200
+
 gnunet-fuse (0.9.3-1) unstable; urgency=low
 
   * New maintainer (Closes: #660439).
