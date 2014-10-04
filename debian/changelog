@@ -1,3 +1,20 @@
+gnunet-fuse (0.10.0-1) unstable; urgency=medium
+
+  * Imported Upstream version 0.10.0.
+  * Remove lib_underlinkage.patch, included upstream.
+  * debian/control:
+    + update the version of gnunet-dev in build-depends to >= 0.10.
+    + move the git repository to collab-maint and use canonical uris.
+    + do not suggest gnunet-server anymore, obsolete.
+  * Remove debian/manpages/ and gnunet-fuse.manpages, the manpage is included
+    upstream.
+  * Update debian/copyright for the files outside of src/ and the years.
+  * Standards version 3.9.6: no changes needed.
+  * Add the upstream signing key to debian/upstream/signing-key.asc and add
+    pgpsigurlmangle option to debian/watch.
+
+ -- Bertrand Marc <beberking@gmail.com>  Sat, 04 Oct 2014 20:11:12 +0200
+
 gnunet-fuse (0.9.3-2.1) unstable; urgency=medium
 
   * Non-maintainer upload.
