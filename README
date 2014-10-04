@@ -1,1 +1,3 @@
-This is a template for GNUnet extensions.
+GNUnet-fuse allows you to mount directories published on GNUnet
+as read-only file-systems (on GNU/Linux and other operating
+systems that support the FUSE API).

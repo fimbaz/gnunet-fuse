@@ -1,16 +1,16 @@
 /*
   This file is part of gnunet-fuse.
   (C) 2012 Christian Grothoff (and other contributing authors)
-  
+
   gnunet-fuse is free software; you can redistribute it and/or
   modify if under the terms of version 2 of the GNU General Public License
   as published by the Free Software Foundation.
- 
+
   gnunet-fuse is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
- 
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
@@ -27,7 +27,6 @@
 
 #include <gnunet/platform.h>
 #include <gnunet/gnunet_util_lib.h>
-#include <gnunet/gnunet_directories.h>
 #include <gnunet/gnunet_resolver_service.h>
 #include <gnunet/gnunet_fs_service.h>
 
@@ -48,7 +47,7 @@ extern const struct GNUNET_CONFIGURATION_Handle *cfg;
 
 
 /**
- * struct containing mapped Path, with URI and other Information like Attributes etc. 
+ * struct containing mapped Path, with URI and other Information like Attributes etc.
  */
 struct GNUNET_FUSE_PathInfo
 {
@@ -100,16 +99,16 @@ struct GNUNET_FUSE_PathInfo
    * Name of temporary file, NULL if we never accessed this file or directory.
    */
   char *tmpfile;
-  
+
   /**
    * file attributes
    */
   struct stat stbuf;
-  
+
   /**
    * Lock for exclusive access to this struct (i.e. for downloading blocks).
    * Lock order: always lock parents before children.
-   */ 
+   */
   struct GNUNET_Mutex *lock;
 
   /**

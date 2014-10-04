@@ -128,9 +128,9 @@ progress_cb (void *cls, const struct GNUNET_FS_ProgressInfo *info)
       GNUNET_break (info->value.download.dc == ctx->dc);
       s =
 	GNUNET_STRINGS_byte_size_fancy (info->value.download.completed *
-					1000 /
+					1000000LL /
 					(info->value.download.
-					 duration.rel_value + 1));
+					 duration.rel_value_us + 1));
       GNUNET_log (GNUNET_ERROR_TYPE_DEBUG,
 		  "Downloading `%s' done (%s/s).\n",
 		  info->value.download.filename, s);

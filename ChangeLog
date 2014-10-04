@@ -1,3 +1,6 @@
+Sun Dec 22 14:29:43 CET 2013
+	Packageing gnunet-fuse for GNUnet 0.10. -CG
+
 2012-03-07  gettextize  <bug-gnu-gettext@gnu.org>
 
 	* m4/gettext.m4: New file, from gettext-0.18.1.

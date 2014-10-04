@@ -1,9 +1,9 @@
 # This file is part of GNUnet.
-# (C) 2001-2012 Christian Grothoff (and other contributing authors)
+# (C) 2001-2013 Christian Grothoff (and other contributing authors)
 #
 # GNUnet is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published
-# by the Free Software Foundation; either version 2, or (at your
+# by the Free Software Foundation; either version 3, or (at your
 # option) any later version.
 #
 # GNUnet is distributed in the hope that it will be useful, but
@@ -20,8 +20,8 @@
 # Process this file with autoconf to produce a configure script.
 #
 AC_PREREQ(2.61)
-AC_INIT([gnunet-fuse],[0.9.3],[bug-gnunet@gnu.org])
-AM_INIT_AUTOMAKE([gnunet-fuse], [0.9.3])
+AC_INIT([gnunet-fuse],[0.10.0],[bug-gnunet@gnu.org])
+AM_INIT_AUTOMAKE([gnunet-fuse], [0.10.0])
 AM_CONFIG_HEADER(gnunet_fuse_config.h)
 
 AH_TOP([#define _GNU_SOURCE  1])
@@ -111,7 +111,7 @@ AM_GNU_GETTEXT([external])
 
 AC_CHECK_HEADERS([errno.h stdio.h unistd.h locale.h sys/stat.h sys/types.h langinfo.h libintl.h unistd.h stddef.h argz.h sys/socket.h netinet/in.h stdarg.h])
 
-backup_LIBS="$LIBS"	
+backup_LIBS="$LIBS"
 backup_CFLAGS="$CFLAGS	"
 backup_CPPFLAGS="$CPPFLAGS"
 CFLAGS="-D_FILE_OFFSET_BITS=64"
@@ -183,6 +183,7 @@ AC_DEFINE_UNQUOTED(PACKAGE_SOURCE_DIR, "${packagesrcdir}", [source dir])
 
 AC_OUTPUT([ po/Makefile.in
 Makefile
+doc/Makefile
 src/Makefile
 src/fuse/Makefile
 ])
