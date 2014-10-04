@@ -13,7 +13,6 @@ Homepage: http://www.gnunet.org/
 Package: gnunet-fuse
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Suggests: gnunet-server
 Description: secure, trust-based peer-to-peer framework (fuse filesystem client)
  GNUnet is a peer-to-peer framework which focuses on providing security. All
  link-to-link messages in the network are confidential and authenticated. The
