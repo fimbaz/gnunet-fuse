@@ -31,19 +31,9 @@ gnunet_fuse_LDADD = \
   -lgnunetutil \
   -lfuse \
   -lgnunetfs \
-  $(INTLLIBS) $(GNUNET_LIBS)
+  $(INTLLIBS) $(GNUNET_LIBS) -lpthread
 gnunet_fuse_CPPFLAGS = \
 	-D_FILE_OFFSET_BITS=64 \
 	-DFUSE_USE_VERSION=26
 
 
-#check_PROGRAMS = \
-# test_fuse_api 
-#
-#TESTS = $(check_PROGRAMS)
-#
-#test_fuse_api_SOURCES = \
-# test_fuse_api.c
-#test_fuse_api_LDADD = \
-#  $(top_builddir)/src/ext/libgnunetext.la \
-#  -lgnunetutil

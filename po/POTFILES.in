@@ -2,7 +2,6 @@ src/fuse/ext_api.c
 src/fuse/getattr.c
 src/fuse/gfs_download.c
 src/fuse/gnunet-fuse.c
-src/fuse/gnunet-service-fuse.c
 src/fuse/mkdir.c
 src/fuse/mknod.c
 src/fuse/mutex.c
