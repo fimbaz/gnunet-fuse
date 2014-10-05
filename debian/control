@@ -8,7 +8,7 @@ Build-Depends:
 Standards-Version: 3.9.6
 Vcs-Git: git://anonscm.debian.org/collab-maint/gnunet-fuse.git
 Vcs-browser: http://anonscm.debian.org/gitweb/?p=collab-maint/gnunet-fuse.git
-Homepage: http://www.gnunet.org/
+Homepage: http://gnunet.org/
 
 Package: gnunet-fuse
 Architecture: any
