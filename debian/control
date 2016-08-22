@@ -1,7 +1,7 @@
 Source: gnunet-fuse
 Section: net
 Priority: optional
-Maintainer: Bertrand Marc <beberking@gmail.com>
+Maintainer: Bertrand Marc <bmarc@debian.org>
 Build-Depends:
  debhelper (>= 9), dh-autoreconf, autopoint, autoconf (>=2.59),
  automake (>=1.11.1), gnunet-dev (>=0.10), libfuse-dev, libglib2.0-dev
