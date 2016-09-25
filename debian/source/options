@@ -1,3 +1,1 @@
-compression = gzip
-compression-level = 9
 extend-diff-ignore="(^|/)(config\.sub|config\.guess|Makefile)$"
