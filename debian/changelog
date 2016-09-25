@@ -1,3 +1,14 @@
+gnunet-fuse (0.10.0-2) unstable; urgency=medium
+
+  * debian/control: update homepage as www.gnunet.org does not work anymore.
+  * Use my @debian.org address for the maintainer field and in debian/copyright.
+  * Add a patch to fix build on kfreebsd.
+  * debian/control: use secure uri in Vcs-* fields.
+  * Standard-version: 3.9.8.
+  * Remove unnecessary compression options.
+
+ -- Bertrand Marc <bmarc@debian.org>  Sun, 25 Sep 2016 16:04:38 +0200
+
 gnunet-fuse (0.10.0-1) unstable; urgency=medium
 
   * Imported Upstream version 0.10.0.
