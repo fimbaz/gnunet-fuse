@@ -1,0 +1,30 @@
+Description: fix build on kfreebsd
+Author: Bertrand Marc <bmarc@debian.org>
+--- a/configure.ac
++++ b/configure.ac
+@@ -109,12 +109,12 @@
+ AM_GNU_GETTEXT_VERSION([0.18.1])
+ AM_GNU_GETTEXT([external])
+ 
+-AC_CHECK_HEADERS([errno.h stdio.h unistd.h locale.h sys/stat.h sys/types.h langinfo.h libintl.h unistd.h stddef.h argz.h sys/socket.h netinet/in.h stdarg.h])
++AC_CHECK_HEADERS([errno.h stdio.h unistd.h locale.h sys/stat.h sys/types.h langinfo.h libintl.h unistd.h stddef.h argz.h sys/socket.h netinet/in.h stdarg.h pthread_np.h])
+ 
+ backup_LIBS="$LIBS"
+ backup_CFLAGS="$CFLAGS	"
+ backup_CPPFLAGS="$CPPFLAGS"
+-CFLAGS="-D_FILE_OFFSET_BITS=64"
++CFLAGS="-D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=26"
+ AC_CHECK_HEADERS([fuse.h],,AC_MSG_ERROR([gnunet-fuse requires fuse.h]))
+ 
+ # test for GNUnet core
+--- a/src/fuse/mutex.c
++++ b/src/fuse/mutex.c
+@@ -26,7 +26,7 @@
+ #include "mutex.h"
+ 
+ #include <pthread.h>
+-#if SOMEBSD
++#if HAVE_PTHREAD_NP_H
+ # include <pthread_np.h>
+ #endif
+ 
