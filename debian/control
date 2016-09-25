@@ -6,8 +6,8 @@ Build-Depends:
  debhelper (>= 9), dh-autoreconf, autopoint, autoconf (>=2.59),
  automake (>=1.11.1), gnunet-dev (>=0.10), libfuse-dev, libglib2.0-dev
 Standards-Version: 3.9.6
-Vcs-Git: git://anonscm.debian.org/collab-maint/gnunet-fuse.git
-Vcs-browser: http://anonscm.debian.org/gitweb/?p=collab-maint/gnunet-fuse.git
+Vcs-Git: https://anonscm.debian.org/git/collab-maint/gnunet-fuse.git
+Vcs-browser: https://anonscm.debian.org/git/collab-maint/gnunet-fuse.git
 Homepage: http://gnunet.org/
 
 Package: gnunet-fuse
