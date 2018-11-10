@@ -13,15 +13,15 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with GNUnet; see the file COPYING.  If not, write to the
-# Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-# Boston, MA 02111-1307, USA.
+# Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+# Boston, MA 02110-1301, USA.
 #
 #
 # Process this file with autoconf to produce a configure script.
 #
 AC_PREREQ(2.61)
-AC_INIT([gnunet-fuse],[0.10.0],[bug-gnunet@gnu.org])
-AM_INIT_AUTOMAKE([gnunet-fuse], [0.10.0])
+AC_INIT([gnunet-fuse],[0.11.0pre66],[bug-gnunet@gnu.org])
+AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(gnunet_fuse_config.h)
 
 AH_TOP([#define _GNU_SOURCE  1])
@@ -106,7 +106,7 @@ esac
 AM_CONDITIONAL(MINGW,   test "$build_target" = "mingw")
 
 # check for gettext
-AM_GNU_GETTEXT_VERSION([0.18.1])
+AM_GNU_GETTEXT_VERSION([0.19.4])
 AM_GNU_GETTEXT([external])
 
 AC_CHECK_HEADERS([errno.h stdio.h unistd.h locale.h sys/stat.h sys/types.h langinfo.h libintl.h unistd.h stddef.h argz.h sys/socket.h netinet/in.h stdarg.h])
@@ -114,7 +114,7 @@ AC_CHECK_HEADERS([errno.h stdio.h unistd.h locale.h sys/stat.h sys/types.h langi
 backup_LIBS="$LIBS"
 backup_CFLAGS="$CFLAGS	"
 backup_CPPFLAGS="$CPPFLAGS"
-CFLAGS="-D_FILE_OFFSET_BITS=64"
+CPPFLAGS="-D_FILE_OFFSET_BITS=64"
 AC_CHECK_HEADERS([fuse.h],,AC_MSG_ERROR([gnunet-fuse requires fuse.h]))
 
 # test for GNUnet core

@@ -1,3 +1,4 @@
+# This Makefile.am is in the public domain
 man_MANS = \
   gnunet-fuse.1
 

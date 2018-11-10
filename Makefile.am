@@ -1,3 +1,4 @@
+# This Makefile.am is in the public domain
 ## Process this file with automake to produce Makefile.in
 
 SUBDIRS = src doc po
