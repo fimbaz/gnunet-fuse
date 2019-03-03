@@ -20,7 +20,7 @@
 # Process this file with autoconf to produce a configure script.
 #
 AC_PREREQ(2.61)
-AC_INIT([gnunet-fuse],[0.11.0pre66],[bug-gnunet@gnu.org])
+AC_INIT([gnunet-fuse],[0.11.0],[bug-gnunet@gnu.org])
 AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(gnunet_fuse_config.h)
 
