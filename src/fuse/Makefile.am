@@ -1,9 +1,10 @@
+# This Makefile.am is in the public domain
 SUBDIRS = .
 
-INCLUDES = \
+AM_CPPFLAGS = \
   -I$(top_srcdir)/src/include \
   -I$(top_srcdir) \
-  @GNUNET_CFLAGS@ 
+  @GNUNET_CFLAGS@
 
 
 bin_PROGRAMS = gnunet-fuse
@@ -25,7 +26,7 @@ gnunet_fuse_SOURCES = \
 #	truncate.c \
 #	unlink.c \
 #	utimens.c \
-#	write.c 
+#	write.c
 
 gnunet_fuse_LDADD = \
   -lgnunetutil \
@@ -33,7 +34,6 @@ gnunet_fuse_LDADD = \
   -lgnunetfs \
   $(INTLLIBS) $(GNUNET_LIBS) -lpthread
 gnunet_fuse_CPPFLAGS = \
-	-D_FILE_OFFSET_BITS=64 \
-	-DFUSE_USE_VERSION=26
-
-
+  $(AM_CPPFLAGS) \
+  -D_FILE_OFFSET_BITS=64 \
+  -DFUSE_USE_VERSION=26

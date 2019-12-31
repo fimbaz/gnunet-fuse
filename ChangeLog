@@ -1,3 +1,23 @@
+Fri 22 Nov 2019 17:50:00 PM CET
+    Releasing gnunet-fuse 0.11.8:
+    updates to build with gnunet 0.11.8,
+    improved build-system. -ng0
+
+Sun 17 Feb 2019 08:52:48 PM CET
+	Packageing gnunet-fuse for GNUnet 0.11. -CG
+
+2015-06-12  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* m4/gettext.m4: Upgrade to gettext-0.19.4.
+	* m4/iconv.m4: Upgrade to gettext-0.19.4.
+	* m4/lib-ld.m4: Upgrade to gettext-0.19.4.
+	* m4/lib-link.m4: Upgrade to gettext-0.19.4.
+	* m4/lib-prefix.m4: Upgrade to gettext-0.19.4.
+	* m4/nls.m4: Upgrade to gettext-0.19.4.
+	* m4/po.m4: Upgrade to gettext-0.19.4.
+	* m4/progtest.m4: Upgrade to gettext-0.19.4.
+	* configure.ac (AM_GNU_GETTEXT_VERSION): Bump to 0.19.4.
+
 Sun Dec 22 14:29:43 CET 2013
 	Packageing gnunet-fuse for GNUnet 0.10. -CG
 
@@ -14,4 +34,3 @@ Sun Dec 22 14:29:43 CET 2013
 	* Makefile.am (SUBDIRS): Add po.
 	* configure.ac (AC_OUTPUT): Add po/Makefile.in.
 	(AM_GNU_GETTEXT_VERSION): Bump to 0.18.1.
-

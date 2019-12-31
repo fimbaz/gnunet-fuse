@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the gnunet-fuse package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: gnunet-fuse 0.10.0\n"
+"Project-Id-Version: gnunet-fuse 0.12.0\n"
 "Report-Msgid-Bugs-To: bug-gnunet@gnu.org\n"
-"POT-Creation-Date: 2013-12-22 14:31+0100\n"
+"POT-Creation-Date: 2019-12-15 13:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/fuse/gfs_download.c:149
+#: src/fuse/gfs_download.c:148
 #, c-format
 msgid "Unexpected status: %d\n"
 msgstr ""
 
-#: src/fuse/gfs_download.c:174
+#: src/fuse/gfs_download.c:172
 #, c-format
 msgid "Could not initialize `%s' subsystem.\n"
 msgstr ""
@@ -47,18 +47,18 @@ msgstr ""
 msgid "Failed to mount `%s': %s\n"
 msgstr ""
 
-#: src/fuse/gnunet-fuse.c:501
+#: src/fuse/gnunet-fuse.c:503
 msgid "Source you get the URI from"
 msgstr ""
 
-#: src/fuse/gnunet-fuse.c:504
+#: src/fuse/gnunet-fuse.c:508
 msgid "path to your mountpoint"
 msgstr ""
 
-#: src/fuse/gnunet-fuse.c:507
+#: src/fuse/gnunet-fuse.c:512
 msgid "run in single-threaded mode"
 msgstr ""
 
-#: src/fuse/gnunet-fuse.c:517
+#: src/fuse/gnunet-fuse.c:525
 msgid "fuse"
 msgstr ""

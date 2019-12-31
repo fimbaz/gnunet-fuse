@@ -1,6 +1,6 @@
 /*
      This file is part of GNUnet.
-     (C) 2001, 2002, 2003, 2004, 2012 Christian Grothoff (and other contributing authors)
+     Copyright (C) 2001, 2002, 2003, 2004, 2012 GNUnet e.V.
 
      GNUnet is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published
@@ -14,8 +14,8 @@
 
      You should have received a copy of the GNU General Public License
      along with GNUnet; see the file COPYING.  If not, write to the
-     Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-     Boston, MA 02111-1307, USA.
+     Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+     Boston, MA 02110-1301, USA.
 */
 
 /**
@@ -26,9 +26,6 @@
 #include "mutex.h"
 
 #include <pthread.h>
-#if SOMEBSD
-# include <pthread_np.h>
-#endif
 
 #ifndef PTHREAD_MUTEX_NORMAL
 #ifdef PTHREAD_MUTEX_TIMED_NP
@@ -70,20 +67,17 @@ GNUNET_mutex_create (int isRecursive)
   pthread_mutexattr_init (&attr);
   if (isRecursive)
     {
-#if LINUX
+#ifdef __linux__
       GNUNET_assert (0 == pthread_mutexattr_setkind_np
 		     (&attr, PTHREAD_MUTEX_RECURSIVE_NP));
-#elif SOMEBSD || GNUNET_freeBSD || GNUNET_freeBSD5
-      GNUNET_assert (0 == pthread_mutexattr_setkind_np
-		     (&attr, PTHREAD_MUTEX_RECURSIVE));
-#elif SOLARIS || OSX || WINDOWS
+#elif BSD || SOLARIS || OSX || WINDOWS
       GNUNET_assert (0 == pthread_mutexattr_settype
 		     (&attr, PTHREAD_MUTEX_RECURSIVE));
 #endif
     }
   else
     {
-#if LINUX
+#ifdef __linux__
       GNUNET_assert (0 == pthread_mutexattr_setkind_np
 		     (&attr, PTHREAD_MUTEX_ERRORCHECK_NP));
 #else
@@ -91,7 +85,7 @@ GNUNET_mutex_create (int isRecursive)
 		     (&attr, PTHREAD_MUTEX_ERRORCHECK));
 #endif
     }
-  mut = GNUNET_malloc (sizeof (struct GNUNET_Mutex));
+  mut = GNUNET_new (struct GNUNET_Mutex);
   GNUNET_assert (0 == pthread_mutex_init (&mut->pt, &attr));
   return mut;
 }
@@ -110,7 +104,7 @@ GNUNET_mutex_lock (struct GNUNET_Mutex * mutex)
 {
   if (0 != (errno = pthread_mutex_lock (&mutex->pt)))
   {
-    GNUNET_log_strerror (GNUNET_ERROR_TYPE_ERROR, "pthread_mutex_unlock");  
+    GNUNET_log_strerror (GNUNET_ERROR_TYPE_ERROR, "pthread_mutex_unlock");
     GNUNET_assert (0);
   }
 }
@@ -121,7 +115,7 @@ GNUNET_mutex_unlock (struct GNUNET_Mutex * mutex)
 {
   if (0 != (errno = pthread_mutex_unlock (&mutex->pt)))
   {
-    GNUNET_log_strerror (GNUNET_ERROR_TYPE_ERROR, "pthread_mutex_unlock");  
+    GNUNET_log_strerror (GNUNET_ERROR_TYPE_ERROR, "pthread_mutex_unlock");
     GNUNET_assert (0);
   }
 }

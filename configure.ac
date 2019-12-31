@@ -1,5 +1,5 @@
 # This file is part of GNUnet.
-# (C) 2001-2013 Christian Grothoff (and other contributing authors)
+# (C) 2001-2013, 2019 Christian Grothoff (and other contributing authors)
 #
 # GNUnet is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published
@@ -13,15 +13,15 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with GNUnet; see the file COPYING.  If not, write to the
-# Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-# Boston, MA 02111-1307, USA.
+# Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+# Boston, MA 02110-1301, USA.
 #
 #
 # Process this file with autoconf to produce a configure script.
 #
 AC_PREREQ(2.61)
-AC_INIT([gnunet-fuse],[0.10.0],[bug-gnunet@gnu.org])
-AM_INIT_AUTOMAKE([gnunet-fuse], [0.10.0])
+AC_INIT([gnunet-fuse],[0.12.0],[bug-gnunet@gnu.org])
+AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(gnunet_fuse_config.h)
 
 AH_TOP([#define _GNU_SOURCE  1])
@@ -31,7 +31,6 @@ AC_PROG_AWK
 AC_PROG_CC
 
 AC_PROG_MKDIR_P
-AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
@@ -62,16 +61,16 @@ linux*)
      AC_DEFINE_UNQUOTED(LINUX,1,[This is a Linux system])
      ;;
 freebsd*)
-     AC_DEFINE_UNQUOTED(SOMEBSD,1,[This is a BSD system])
-     AC_DEFINE_UNQUOTED(FREEBSD,1,[This is a FreeBSD system])
+     build_target="freebsd"
      ;;
 openbsd*)
-     AC_DEFINE_UNQUOTED(SOMEBSD,1,[This is a BSD system])
-     AC_DEFINE_UNQUOTED(OPENBSD,1,[This is an OpenBSD system])
+     build_target="openbsd"
      ;;
 netbsd*)
-     AC_DEFINE_UNQUOTED(SOMEBSD,1,[This is a BSD system])
-     AC_DEFINE_UNQUOTED(NETBSD,1,[This is a NetBSD system])
+     build_target="netbsd"
+     # This seems to be required for librefuse, once I manage to make
+     # gnunet-fuse build with it:
+     # CFLAGS="-D_KERNTYPES -D_NETBSD_SOURCE $CFLAGS"
      ;;
 *solaris*)
      AC_DEFINE_UNQUOTED(SOLARIS,1,[This is a Solaris system])
@@ -79,7 +78,7 @@ netbsd*)
      build_target="solaris"
      ;;
 *arm-linux*)
-     AC_DEFINE_UNQUOTED(LINUX,1,[This is a Linux system])
+     build_target="linux"
      ;;
 *cygwin*)
      AC_DEFINE_UNQUOTED(CYGWIN,1,[This is a Cygwin system])
@@ -106,16 +105,22 @@ esac
 AM_CONDITIONAL(MINGW,   test "$build_target" = "mingw")
 
 # check for gettext
-AM_GNU_GETTEXT_VERSION([0.18.1])
+AM_GNU_GETTEXT_VERSION([0.19.4])
 AM_GNU_GETTEXT([external])
 
-AC_CHECK_HEADERS([errno.h stdio.h unistd.h locale.h sys/stat.h sys/types.h langinfo.h libintl.h unistd.h stddef.h argz.h sys/socket.h netinet/in.h stdarg.h])
+AC_CHECK_HEADERS([errno.h stdio.h unistd.h locale.h sys/stat.h sys/types.h langinfo.h libintl.h unistd.h stddef.h argz.h sys/socket.h netinet/in.h stdarg.h sys/param.h])
 
 backup_LIBS="$LIBS"
 backup_CFLAGS="$CFLAGS	"
 backup_CPPFLAGS="$CPPFLAGS"
-CFLAGS="-D_FILE_OFFSET_BITS=64"
-AC_CHECK_HEADERS([fuse.h],,AC_MSG_ERROR([gnunet-fuse requires fuse.h]))
+CPPFLAGS="-D_FILE_OFFSET_BITS=64"
+
+AC_SEARCH_LIBS([fuse_exit], [fuse refuse], [], [AC_MSG_ERROR([fuse is required.])])
+
+# uncrustify
+# TODO: maybe add flag to pass location
+AC_CHECK_PROG(UNCRUSTIFY_BINARY, uncrustify, true)
+AM_CONDITIONAL(HAVE_UNCRUSTIFY_BINARY, $UNCRUSTIFY_BINARY)
 
 # test for GNUnet core
 gnunet=0
@@ -145,7 +150,7 @@ AC_ARG_WITH(gnunet,
    ]
 )
 
-if test "x$gnunet" == "x0" -a ! "x$lookin" == "x"
+if test "x$gnunet" = "x0" -a ! "x$lookin" = "x"
 then
   AC_MSG_CHECKING(for GNUnet util library in $lookin)
   GNUNET_LIBS="-L${lookin}/lib"
@@ -164,7 +169,7 @@ then
   )
 fi
 
-if test "x$gnunet" == "x0"
+if test "x$gnunet" = "x0"
 then
   AC_MSG_ERROR([gnunet-fuse requires GNUnet])
 fi
@@ -181,8 +186,9 @@ AC_DEFINE_DIR([PACKAGE_DATA], [datarootdir], [The directory for installing read-
 packagesrcdir=`cd $srcdir && pwd`
 AC_DEFINE_UNQUOTED(PACKAGE_SOURCE_DIR, "${packagesrcdir}", [source dir])
 
-AC_OUTPUT([ po/Makefile.in
+AC_OUTPUT([
 Makefile
+po/Makefile.in
 doc/Makefile
 src/Makefile
 src/fuse/Makefile

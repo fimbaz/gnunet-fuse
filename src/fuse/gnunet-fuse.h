@@ -1,6 +1,6 @@
 /*
   This file is part of gnunet-fuse.
-  (C) 2012 Christian Grothoff (and other contributing authors)
+  Copyright (C) 2012 GNUnet e.V.
 
   gnunet-fuse is free software; you can redistribute it and/or
   modify if under the terms of version 2 of the GNU General Public License
@@ -13,7 +13,7 @@
 
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
 
 */
 /**
@@ -148,9 +148,9 @@ struct GNUNET_FUSE_PathInfo
  */
 struct GNUNET_FUSE_PathInfo *
 GNUNET_FUSE_path_info_create (struct GNUNET_FUSE_PathInfo *parent,
-			      const char *filename,
-			      const struct GNUNET_FS_Uri *uri,
-			      int is_directory);
+                              const char *filename,
+                              const struct GNUNET_FS_Uri *uri,
+                              int is_directory);
 
 
 /**
@@ -163,7 +163,7 @@ GNUNET_FUSE_path_info_create (struct GNUNET_FUSE_PathInfo *parent,
  */
 struct GNUNET_FUSE_PathInfo *
 GNUNET_FUSE_path_info_get (const char *path,
-			   int *eno);
+                           int *eno);
 
 
 /**
@@ -195,39 +195,39 @@ GNUNET_FUSE_path_info_delete (struct GNUNET_FUSE_PathInfo *pi);
  */
 int
 GNUNET_FUSE_load_directory (struct GNUNET_FUSE_PathInfo *pi,
-			    int * eno);
+                            int *eno);
 
 
 /* FUSE function files */
-int gn_getattr(const char *path, struct stat *stbuf);
+int gn_getattr (const char *path, struct stat *stbuf);
 
-int gn_open(const char *path, struct fuse_file_info *fi);
+int gn_open (const char *path, struct fuse_file_info *fi);
 
-int gn_read(const char *path, char *buf, size_t size, off_t offset,
-	struct fuse_file_info *fi);
+int gn_read (const char *path, char *buf, size_t size, off_t offset,
+             struct fuse_file_info *fi);
 
-int gn_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
-	off_t offset, struct fuse_file_info *fi);
+int gn_readdir (const char *path, void *buf, fuse_fill_dir_t filler,
+                off_t offset, struct fuse_file_info *fi);
 
 
-int gn_mknod(const char *path, mode_t mode, dev_t rdev);
+int gn_mknod (const char *path, mode_t mode, dev_t rdev);
 
-int gn_mkdir(const char *path, mode_t mode);
+int gn_mkdir (const char *path, mode_t mode);
 
-int gn_unlink(const char *path);
+int gn_unlink (const char *path);
 
-int gn_rmdir(const char *path);
+int gn_rmdir (const char *path);
 
-int gn_rename(const char *from, const char *to);
+int gn_rename (const char *from, const char *to);
 
-int gn_truncate(const char *path, off_t size);
+int gn_truncate (const char *path, off_t size);
 
-int gn_write(const char *path, const char *buf, size_t size, off_t offset,
-	struct fuse_file_info *fi);
+int gn_write (const char *path, const char *buf, size_t size, off_t offset,
+              struct fuse_file_info *fi);
 
-int gn_release(const char *path, struct fuse_file_info *fi);
+int gn_release (const char *path, struct fuse_file_info *fi);
 
-int gn_utimens(const char *path, const struct timespec ts[2]);
+int gn_utimens (const char *path, const struct timespec ts[2]);
 
 
 #endif

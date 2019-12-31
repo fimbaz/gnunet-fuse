@@ -1,7 +1,7 @@
 /*
   This file is part of gnunet-fuse.
-  (C) 2012 Christian Grothoff (and other contributing authors)
-  
+  Copyright (C) 2012 GNUnet e.V.
+
   gnunet-fuse is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published
   by the Free Software Foundation; either version 3, or (at your
@@ -11,10 +11,10 @@
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
- 
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
 
 */
 
@@ -64,7 +64,7 @@ static struct GNUNET_FUSE_PathInfo *root;
 
 
 /**
- * Function used to process entries in a directory; adds the 
+ * Function used to process entries in a directory; adds the
  * respective entry to the parent directory.
  *
  * @param cls closure with the 'struct GNUNET_FUSE_PathInfo' of the parent
@@ -79,7 +79,7 @@ static struct GNUNET_FUSE_PathInfo *root;
  *            embedded with the directory itself).
  * @param data data available for the file (length bytes)
  */
-static void 
+static void
 process_directory_entry (void *cls,
 			 const char *filename,
 			 const struct GNUNET_FS_Uri *
@@ -132,7 +132,7 @@ GNUNET_FUSE_load_directory (struct GNUNET_FUSE_PathInfo *pi,
 					      0,
 					      GNUNET_FS_uri_chk_get_file_size (pi->uri)))
   {
-    UNLINK (pi->tmpfile);
+    unlink (pi->tmpfile);
     GNUNET_free (pi->tmpfile);
     pi->tmpfile = NULL;
     *eno = EIO; /* low level IO error */
@@ -142,13 +142,13 @@ GNUNET_FUSE_load_directory (struct GNUNET_FUSE_PathInfo *pi,
   size = (size_t) GNUNET_FS_uri_chk_get_file_size (pi->uri);
   fh = GNUNET_DISK_file_open (pi->tmpfile,
 			      GNUNET_DISK_OPEN_READ,
-			      GNUNET_DISK_PERM_NONE);			      
+			      GNUNET_DISK_PERM_NONE);
   if (NULL == fh)
   {
     *eno = EIO;
     return GNUNET_SYSERR;
   }
-  data = GNUNET_DISK_file_map (fh, 
+  data = GNUNET_DISK_file_map (fh,
 			       &mh,
 			       GNUNET_DISK_MAP_TYPE_READ,
 			       size);
@@ -169,7 +169,7 @@ GNUNET_FUSE_load_directory (struct GNUNET_FUSE_PathInfo *pi,
   if (0 != *eno)
     return GNUNET_SYSERR;
   return GNUNET_OK;
-} 
+}
 
 
 /**
@@ -188,7 +188,7 @@ GNUNET_FUSE_path_info_get (const char *path,
   struct GNUNET_FUSE_PathInfo *pi;
   struct GNUNET_FUSE_PathInfo *pos;
   char *tok;
-  
+
   memcpy (buf, path, slen);
   pi = root;
   GNUNET_log (GNUNET_ERROR_TYPE_DEBUG,
@@ -205,7 +205,7 @@ GNUNET_FUSE_path_info_get (const char *path,
       if (GNUNET_OK != GNUNET_FUSE_load_directory (pi, eno))
       {
 	GNUNET_mutex_unlock (pi->lock);
-	return NULL; 
+	return NULL;
       }
     }
 
@@ -215,7 +215,7 @@ GNUNET_FUSE_path_info_get (const char *path,
 			  pos->filename)) )
       pos = pos->next;
     if (NULL == pos)
-    {      
+    {
       GNUNET_mutex_unlock (pi->lock);
       *eno = ENOENT;
       GNUNET_log (GNUNET_ERROR_TYPE_DEBUG,
@@ -233,7 +233,7 @@ GNUNET_FUSE_path_info_get (const char *path,
   }
   ++pi->rc;
   GNUNET_mutex_unlock (pi->lock);
-  return pi;  
+  return pi;
 }
 
 
@@ -262,7 +262,7 @@ GNUNET_FUSE_path_info_create (struct GNUNET_FUSE_PathInfo *parent,
     GNUNET_mutex_lock (parent->lock);
   }
 
-  pi = GNUNET_malloc (sizeof (struct GNUNET_FUSE_PathInfo));
+  pi = GNUNET_new (struct GNUNET_FUSE_PathInfo);
   pi->parent = parent;
   pi->filename = GNUNET_strdup (filename);
   len = strlen (pi->filename);
@@ -308,7 +308,7 @@ GNUNET_FUSE_path_info_done (struct GNUNET_FUSE_PathInfo *pi)
   }
   GNUNET_mutex_lock (pi->lock);
   --pi->rc;
-  GNUNET_mutex_unlock (pi->lock);  
+  GNUNET_mutex_unlock (pi->lock);
 }
 
 
@@ -321,7 +321,7 @@ GNUNET_FUSE_path_info_done (struct GNUNET_FUSE_PathInfo *pi)
  */
 int
 GNUNET_FUSE_path_info_delete (struct GNUNET_FUSE_PathInfo *pi)
-{  
+{
   struct GNUNET_FUSE_PathInfo *parent = pi->parent;
   int rc;
   int ret;
@@ -352,7 +352,7 @@ GNUNET_FUSE_path_info_delete (struct GNUNET_FUSE_PathInfo *pi)
   {
     if (NULL != pi->tmpfile)
     {
-      GNUNET_break (0 == UNLINK (pi->tmpfile));
+      GNUNET_break (0 == unlink (pi->tmpfile));
       GNUNET_free (pi->tmpfile);
     }
     GNUNET_free (pi->filename);
@@ -442,7 +442,7 @@ run (void *cls,
   if ( (GNUNET_YES != GNUNET_FS_uri_test_chk (uri)) &&
        (GNUNET_YES != GNUNET_FS_uri_test_loc (uri)) )
   {
-    fprintf (stderr, 
+    fprintf (stderr,
 	     _("The given URI is not for a directory and can thus not be mounted\n"));
     ret = 4;
     GNUNET_FS_uri_destroy (uri);
@@ -450,13 +450,13 @@ run (void *cls,
   }
 
   root = GNUNET_FUSE_path_info_create (NULL, "/", uri, GNUNET_YES);
-  if (GNUNET_OK != 
+  if (GNUNET_OK !=
       GNUNET_FUSE_load_directory (root, &eno))
   {
     fprintf (stderr,
 	     _("Failed to mount `%s': %s\n"),
 	     source,
-	     STRERROR (eno));    
+	     strerror (eno));
     ret = 5;
     cleanup_path_info (root);
     GNUNET_FS_uri_destroy (uri);
@@ -496,26 +496,37 @@ run (void *cls,
 int
 main (int argc, char *const *argv)
 {
-  static const struct GNUNET_GETOPT_CommandLineOption options[] = {
-    {'s', "source", "URI",
-     gettext_noop ("Source you get the URI from"), 1,
-     &GNUNET_GETOPT_set_string, &source},
-    {'d', "directory", "PATH",
-     gettext_noop ("path to your mountpoint"), 1,
-     &GNUNET_GETOPT_set_string, &directory},
-    {'t', "single-threaded", NULL,
-     gettext_noop ("run in single-threaded mode"), 0,
-     &GNUNET_GETOPT_set_one, &single_threaded},
+  struct GNUNET_GETOPT_CommandLineOption options[] = {
+    GNUNET_GETOPT_option_string ('s',
+                                 "source",
+                                 "URI",
+                                 gettext_noop ("Source you get the URI from"),
+                                 &source),
+    GNUNET_GETOPT_option_string ('d',
+                                 "directory",
+                                 "PATH",
+                                 gettext_noop ("path to your mountpoint"),
+                                 &directory),
+    GNUNET_GETOPT_option_flag ('t',
+                               "single-threaded",
+                               gettext_noop ("run in single-threaded mode"),
+                               &single_threaded),
     GNUNET_GETOPT_OPTION_END
   };
-  GNUNET_log_setup ("gnunet-fuse", "DEBUG", NULL);
+
+  GNUNET_log_setup ("gnunet-fuse",
+		    "DEBUG",
+		    NULL);
   return (GNUNET_OK ==
 	  GNUNET_PROGRAM_run2 (argc,
 			       argv,
 			       "gnunet-fuse -s URI [-- FUSE-OPTIONS] DIRECTORYNAME",
 			       gettext_noop
 			       ("fuse"),
-			       options, &run, NULL, GNUNET_YES)) ? ret : 1;
+			       options,
+			       &run,
+			       NULL,
+			       GNUNET_YES)) ? ret : 1;
 }
 
 /* end of gnunet-fuse.c */

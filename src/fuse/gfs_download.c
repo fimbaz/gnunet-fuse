@@ -1,20 +1,20 @@
 /*
   This file is part of gnunet-fuse.
-  (C) 2012 Christian Grothoff (and other contributing authors)
-  
+  Copyright (C) 2012 GNUnet e.V.
+
   gnunet-fuse is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published
   by the Free Software Foundation; either version 3, or (at your
   option) any later version.
- 
+
   gnunet-fuse is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
- 
+
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA
 
 */
 /**
@@ -68,10 +68,9 @@ struct Context
  * Task run when we shut down.
  *
  * @param cls our 'struct Context'
- * @param tc scheduler context (unused)
  */
 static void
-shutdown_task (void *cls, const struct GNUNET_SCHEDULER_TaskContext *tc)
+shutdown_task (void *cls)
 {
   struct Context *ctx = cls;
 
@@ -111,7 +110,7 @@ progress_cb (void *cls, const struct GNUNET_FS_ProgressInfo *info)
       break;
     case GNUNET_FS_STATUS_DOWNLOAD_PROGRESS:
       GNUNET_break (info->value.download.dc == ctx->dc);
-      GNUNET_log (GNUNET_ERROR_TYPE_DEBUG,		   
+      GNUNET_log (GNUNET_ERROR_TYPE_DEBUG,
 		  "Downloading `%s' at %llu/%llu\n",
 		  info->value.download.filename,
 		  (unsigned long long) info->value.download.completed,
@@ -145,7 +144,7 @@ progress_cb (void *cls, const struct GNUNET_FS_ProgressInfo *info)
     case GNUNET_FS_STATUS_DOWNLOAD_INACTIVE:
       break;
     default:
-      GNUNET_log (GNUNET_ERROR_TYPE_ERROR, 
+      GNUNET_log (GNUNET_ERROR_TYPE_ERROR,
 		  _("Unexpected status: %d\n"), info->status);
       break;
     }
@@ -157,30 +156,29 @@ progress_cb (void *cls, const struct GNUNET_FS_ProgressInfo *info)
  * Main task run by the helper process which downloads the file.
  *
  * @param cls 'struct Context' with information about the download
- * @param tc scheduler context
  */
 static void
-download_task (void *cls, const struct GNUNET_SCHEDULER_TaskContext *tc)
+download_task (void *cls)
 {
   struct Context *ctx = cls;
 
   ctx->fs = GNUNET_FS_start (cfg, "gnunet-fuse", &progress_cb, ctx,
 			     GNUNET_FS_FLAGS_NONE,
 			     GNUNET_FS_OPTIONS_DOWNLOAD_PARALLELISM, 1,
-			     GNUNET_FS_OPTIONS_REQUEST_PARALLELISM, 1, 
+			     GNUNET_FS_OPTIONS_REQUEST_PARALLELISM, 1,
 			     GNUNET_FS_OPTIONS_END);
   if (NULL == ctx->fs)
   {
     GNUNET_log (GNUNET_ERROR_TYPE_ERROR, _("Could not initialize `%s' subsystem.\n"), "FS");
     return;
   }
-  ctx->dc = GNUNET_FS_download_start (ctx->fs, 
-				      ctx->path_info->uri, ctx->path_info->meta, 
-				      ctx->path_info->tmpfile, NULL, 
+  ctx->dc = GNUNET_FS_download_start (ctx->fs,
+				      ctx->path_info->uri, ctx->path_info->meta,
+				      ctx->path_info->tmpfile, NULL,
 				      (uint64_t) ctx->start_offset,
 				      ctx->length,
-				      anonymity_level, 
-				      GNUNET_FS_DOWNLOAD_OPTION_NONE, 
+				      anonymity_level,
+				      GNUNET_FS_DOWNLOAD_OPTION_NONE,
 				      NULL, NULL);
   if (NULL == ctx->dc)
   {
@@ -188,8 +186,7 @@ download_task (void *cls, const struct GNUNET_SCHEDULER_TaskContext *tc)
     ctx->fs = NULL;
     return;
   }
-  GNUNET_SCHEDULER_add_delayed (GNUNET_TIME_UNIT_FOREVER_REL,
-				&shutdown_task, ctx);
+  GNUNET_SCHEDULER_add_shutdown (&shutdown_task, ctx);
 }
 
 
