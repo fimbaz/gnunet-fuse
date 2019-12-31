@@ -1,43 +1,62 @@
-.TH gnunet\-fuse "1" "6 Jun 2012" "GNUnet"
-.SH NAME
-gnunet\-fuse \- mount directories shared on gnunet
-
-.SH SYNOPSIS
-.B gnunet\-fuse
-[\fIOPTIONS\fR]
-.SH DESCRIPTION
-.PP
-
-gnunet\-fuse is a tool to mount directories that have been published via GNUnet's file\-sharing applications.  With gnunet\-fuse, directories that have been published on GNUnet can be mounted as read\-only file systems and the accessed using normal file operations.  In contrast to downloading the directory recursively via gnunet\-download, this has the advantage that files are downloaded on\-demand.  Only those files (or directories) that you access will be downloaded.  Furthermore, in the case of larger files, only those blocks that an application actually reads will be downloaded.  Naturally, operations on the file system will block until the download has succeeded, which can theoretically mean that they never terminate and must be aborted.
-
-gnunet\-fuse will store all downloaded files in a temporary directory on disk.  This cache will be purged when gnunet\-fuse exits normally (which happens when the file\-system is unmounted).  As mounting a file system is a priviledged operation, gnunet\-fuse must be run by root.  If root is not in the 'gnunet' group, access to the shared directory will likely fail as the gnunet\-service\-fs will likely refuse access to root.  This can be solved either by adding root to the 'gnunet' group, or by disabling the access control options for gnunet\-service\-fs.
-
-.TP
-\fB\-c \fIFILENAME\fR, \fB\-\-config=FILENAME\fR
-configuration file to use
-.TP
-\fB\-d \fIPATH\fR, \fB\-\-directory=PATH\fR
-PATH specifies the mountpoint that gnunet\-fuse should use as the destination for mounting the file system.
-.TP
-\fB\-h\fR, \fB\-\-help\fR
-print help page
-.TP
-\fB\-L \fILOGLEVEL\fR, \fB\-\-loglevel=LOGLEVEL\fR
-Change the loglevel.  Possible values for LOGLEVEL are ERROR, WARNING, INFO and DEBUG.
-.TP
-\fB\-s \fIURI\fR, \fB\-\-source=URI\fR
-URI is the file\-sharing URI of the directory that is to be mounted.  It must be either of type CHK or of type LOC.
-.TP
-\fB\-t\fR, \fB\-\-single-threaded\fR
-in this mode, gnunet\-fuse will run in "debug" mode and disable FUSE concurrency (and add some additional logging).  Normally, gnunet\-fuse will download multiple files in parallel if multiple IO requests are queued with the file system at the same time.   In debug mode, all requests are processed sequentially.  Note that gnunet\-fuse will still fork a helper process to perform the actual interaction with the GNUnet file\-sharing service.
-.TP
-\fB\-v\fR, \fB\-\-version\fR
-print the version number
-
-.SH NOTES
-gnunet\-fuse currently only supports read\-only operations on the file system.  All files will be owned by root and will be world-readable.
-
-.SH "REPORTING BUGS"
-Report bugs by using mantis <https://gnunet.org/bugs/> or by sending electronic mail to <gnunet\-developers@gnu.org>
-.SH "SEE ALSO"
-\fBgnunet\-publish\fP(1), \fBgnunet\-fs\-gtk\fP(1)
+.Dd June 6, 2012
+.Dt GNUNET-FUSE 1
+.Os
+.Sh NAME
+.Nm gnunet-fuse
+.Nd mount directories shared on gnunet
+.Sh SYNOPSIS
+.Nm
+.Op Fl c Ar FILENAME | Fl -config= Ns Ar FILENAME
+.Op Fl d Ar PATH | Fl -directory= Ns Ar PATH
+.Op Fl h | -help
+.Op Fl L Ar LOGLEVEL | Fl -loglevel= Ns Ar LOGLEVEL
+.Op Fl s Ar URI | Fl -source= Ns Ar URI
+.Op Fl t | -single-threaded
+.Op Fl v | -version
+.Sh DESCRIPTION
+.Nm
+is a tool to mount directories that have been published via GNUnet's file-sharing applications.
+With gnunet-fuse, directories that have been published on GNUnet can be mounted as read-only file systems and the accessed using normal file operations.
+In contrast to downloading the directory recursively via gnunet-download, this has the advantage that files are downloaded on-demand.
+Only those files (or directories) that you access will be downloaded.
+Furthermore, in the case of larger files, only those blocks that an application actually reads will be downloaded.
+Naturally, operations on the file system will block until the download has succeeded, which can theoretically mean that they never terminate and must be aborted.
+.Pp
+gnunet-fuse will store all downloaded files in a temporary directory on disk.
+This cache will be purged when gnunet-fuse exits normally (which happens when the file-system is unmounted).
+As mounting a file system is a priviledged operation, gnunet-fuse must be run by root.
+If root is not in the 'gnunet' group, access to the shared directory will likely fail as the gnunet-service-fs will likely refuse access to root.
+This can be solved either by adding root to the 'gnunet' group, or by disabling the access control options for gnunet-service\-fs.
+.Pp
+gnunet-fuse currently only supports read-only operations on the file system.
+All files will be owned by root and will be world-readable.
+.Bl -tag -width Ds
+.It Fl c Ar FILENAME | Fl -config= Ns Ar FILENAME
+Configuration file to use.
+.It Fl d Ar PATH | Fl \-directory= Ns Ar PATH
+PATH specifies the mountpoint that gnunet-fuse should use as the destination for mounting the file system.
+.It Fl h | -help
+Print the help page
+.It Fl L Ar LOGLEVEL | Fl \-loglevel= Ns Ar LOGLEVEL
+Change the loglevel.
+Possible values for LOGLEVEL are ERROR, WARNING, INFO and DEBUG.
+.It Fl s Ar URI | Fl -source= Ns Ar URI
+URI is the file-sharing URI of the directory that is to be mounted.
+It must be either of type CHK or of type LOC.
+.It Fl t | -single-threaded
+In this mode, gnunet-fuse will run in "debug" mode and disable FUSE concurrency (and add some additional logging).
+Normally, gnunet-fuse will download multiple files in parallel if multiple IO requests are queued with the file system at the same time.
+In debug mode, all requests are processed sequentially.
+Note that gnunet-fuse will still fork a helper process to perform the actual interaction with the GNUnet file-sharing service.
+.It Fl v | -version
+Print the version number.
+.El
+.\".Sh EXAMPLES
+.Sh SEE ALSO
+.Xr gnunet-publish 1 ,
+.Xr gnunet-fs-gtk 1
+.Sh BUGS
+Report bugs by using
+.Lk https://bugs.gnunet.org
+or by sending electronic mail to
+.Aq Mt gnunet-developers@gnu.org .

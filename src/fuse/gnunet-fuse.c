@@ -132,7 +132,7 @@ GNUNET_FUSE_load_directory (struct GNUNET_FUSE_PathInfo *pi,
 					      0,
 					      GNUNET_FS_uri_chk_get_file_size (pi->uri)))
   {
-    UNLINK (pi->tmpfile);
+    unlink (pi->tmpfile);
     GNUNET_free (pi->tmpfile);
     pi->tmpfile = NULL;
     *eno = EIO; /* low level IO error */
@@ -352,7 +352,7 @@ GNUNET_FUSE_path_info_delete (struct GNUNET_FUSE_PathInfo *pi)
   {
     if (NULL != pi->tmpfile)
     {
-      GNUNET_break (0 == UNLINK (pi->tmpfile));
+      GNUNET_break (0 == unlink (pi->tmpfile));
       GNUNET_free (pi->tmpfile);
     }
     GNUNET_free (pi->filename);
@@ -456,7 +456,7 @@ run (void *cls,
     fprintf (stderr,
 	     _("Failed to mount `%s': %s\n"),
 	     source,
-	     STRERROR (eno));
+	     strerror (eno));
     ret = 5;
     cleanup_path_info (root);
     GNUNET_FS_uri_destroy (uri);

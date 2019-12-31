@@ -76,7 +76,7 @@ gn_read (const char *path, char *buf, size_t size, off_t offset,
 						offset,
 						size))
     {
-      UNLINK (path_info->tmpfile);
+      unlink (path_info->tmpfile);
       GNUNET_free (path_info->tmpfile);
       path_info->tmpfile = NULL;
       GNUNET_FUSE_path_info_done (path_info);
@@ -93,7 +93,7 @@ gn_read (const char *path, char *buf, size_t size, off_t offset,
 						  offset,
 						  size))
       {
-	UNLINK (path_info->tmpfile);
+	unlink (path_info->tmpfile);
 	GNUNET_free (path_info->tmpfile);
 	path_info->tmpfile = NULL;
 	GNUNET_FUSE_path_info_done (path_info);
@@ -154,7 +154,7 @@ gn_read (const char *path, char *buf, size_t size, off_t offset,
     GNUNET_log (GNUNET_ERROR_TYPE_DEBUG, 
 		"Error reading from file `%s': %s\n",
 		path,
-		STRERROR (errno));
+		strerror (errno));
     GNUNET_DISK_file_close (fh);
     GNUNET_FUSE_path_info_done (path_info);
     return - eno; 

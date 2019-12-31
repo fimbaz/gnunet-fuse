@@ -1,7 +1,7 @@
 Program: gnunet-fuse
 Homepage: https://gnunet.org/
 Maintainer: Christian Grothoff <christian@grothoff.org>
-Bug reports: https://gnunet.org/bugs/
+Bug reports: https://bugs.gnunet.org
 Security related bug reports: security@gnunet.org
 License: GPLv3+ 
 

@@ -51,15 +51,15 @@ struct GNUNET_Mutex *
 GNUNET_mutex_create (int isRecursive);
 
 
-void 
+void
 GNUNET_mutex_destroy (struct GNUNET_Mutex *mutex);
 
 
-void 
+void
 GNUNET_mutex_lock (struct GNUNET_Mutex *mutex);
 
 
-void 
+void
 GNUNET_mutex_unlock (struct GNUNET_Mutex *mutex);
 
 

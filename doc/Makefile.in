@@ -219,6 +219,7 @@ SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
+UNCRUSTIFY_BINARY = @UNCRUSTIFY_BINARY@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
@@ -266,7 +267,6 @@ pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
-runstatedir = @runstatedir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srcdir = @srcdir@
@@ -277,9 +277,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 
 # This Makefile.am is in the public domain
-man_MANS = \
-  gnunet-fuse.1
-
+man_MANS = gnunet-fuse.1
 EXTRA_DIST = ${man_MANS}
 all: all-am
 

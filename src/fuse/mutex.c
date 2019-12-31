@@ -26,9 +26,6 @@
 #include "mutex.h"
 
 #include <pthread.h>
-#if SOMEBSD
-# include <pthread_np.h>
-#endif
 
 #ifndef PTHREAD_MUTEX_NORMAL
 #ifdef PTHREAD_MUTEX_TIMED_NP
@@ -70,20 +67,17 @@ GNUNET_mutex_create (int isRecursive)
   pthread_mutexattr_init (&attr);
   if (isRecursive)
     {
-#if LINUX
+#ifdef __linux__
       GNUNET_assert (0 == pthread_mutexattr_setkind_np
 		     (&attr, PTHREAD_MUTEX_RECURSIVE_NP));
-#elif SOMEBSD || GNUNET_freeBSD || GNUNET_freeBSD5
-      GNUNET_assert (0 == pthread_mutexattr_setkind_np
-		     (&attr, PTHREAD_MUTEX_RECURSIVE));
-#elif SOLARIS || OSX || WINDOWS
+#elif BSD || SOLARIS || OSX || WINDOWS
       GNUNET_assert (0 == pthread_mutexattr_settype
 		     (&attr, PTHREAD_MUTEX_RECURSIVE));
 #endif
     }
   else
     {
-#if LINUX
+#ifdef __linux__
       GNUNET_assert (0 == pthread_mutexattr_setkind_np
 		     (&attr, PTHREAD_MUTEX_ERRORCHECK_NP));
 #else
@@ -110,7 +104,7 @@ GNUNET_mutex_lock (struct GNUNET_Mutex * mutex)
 {
   if (0 != (errno = pthread_mutex_lock (&mutex->pt)))
   {
-    GNUNET_log_strerror (GNUNET_ERROR_TYPE_ERROR, "pthread_mutex_unlock");  
+    GNUNET_log_strerror (GNUNET_ERROR_TYPE_ERROR, "pthread_mutex_unlock");
     GNUNET_assert (0);
   }
 }
@@ -121,7 +115,7 @@ GNUNET_mutex_unlock (struct GNUNET_Mutex * mutex)
 {
   if (0 != (errno = pthread_mutex_unlock (&mutex->pt)))
   {
-    GNUNET_log_strerror (GNUNET_ERROR_TYPE_ERROR, "pthread_mutex_unlock");  
+    GNUNET_log_strerror (GNUNET_ERROR_TYPE_ERROR, "pthread_mutex_unlock");
     GNUNET_assert (0);
   }
 }
